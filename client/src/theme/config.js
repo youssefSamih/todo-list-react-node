@@ -55,7 +55,7 @@ const theme = {
     lightCoral: '#F08585',
     primary: {
       lightest: '#d3f0fc',
-      lighter: '#d1f3ff',
+      lighter: '#bcc8e5',
       light: '#14bcff',
       main: '#21B4EF',
       dark: '#18a2da',
@@ -70,7 +70,7 @@ const theme = {
         lighter: '#ffe2e6',
         light: '#f3445f',
         main: '#e33751',
-        dark: '#c83047',
+        dark: '#f07266',
         darker: '#c21f30',
         darkest: '#C21F30',
       },
@@ -78,7 +78,7 @@ const theme = {
         lighter: '#caefcf',
         light: '#70d47c',
         main: '#67c272',
-        dark: '#5dae67',
+        dark: '#4792a0',
       },
       info: {
         lighter: '#c4ebfb',
