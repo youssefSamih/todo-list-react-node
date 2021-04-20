@@ -5,18 +5,14 @@ export const Container = styled.div`
   margin: 0 auto;
   width: 30%;
 
-  /* @media (min-width: 601px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 90%;
   }
-
-  @media (min-width: 993px) {
-    width: 80%;
-  } */
 `;
 
-export const InputsContainer = styled.div`
+export const InputsContainer = styled.form`
   display: flex;
-  border: 1px solid ${({ theme }) => theme.colors.primary.lighter};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   border-radius: 15px;
   overflow: hidden;
 `;
@@ -28,7 +24,7 @@ export const ListUl = styled.ul`
 
 export const Divider = styled.hr`
   margin: 2rem 0;
-  border-color: ${({ theme }) => theme.colors.primary.lighter};
+  border-color: ${({ theme }) => theme.colors.primary};
   opacity: 0.6;
 `;
 
@@ -37,7 +33,12 @@ export const ListItem = styled.li`
   justify-content: space-between;
 `;
 
-export const ListItemTextContent = styled.p`
+export const ListItemTextContent = styled.button`
   font-size: ${({ theme }) => theme.fonts.size.lg};
+	width: 100%;
+    border: none;
+    background: transparent;
+    text-align: left;
+}
   ${({ done }) => (done ? 'text-decoration: line-through;' : '')}
 `;
