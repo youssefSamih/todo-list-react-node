@@ -1,4 +1,5 @@
 import React from 'react';
+import api from 'services/api';
 import Button from 'Ui/Button';
 import Input from 'Ui/Input';
 import Title from 'Ui/Title';
@@ -17,39 +18,47 @@ const TodoMain = () => {
     todolistInput: '',
     todoList: [],
   });
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setState((prevState) => ({
-      ...prevState,
-      todoList: [
-        ...prevState.todoList.filter(
-          (todo) => todo.value !== prevState.todolistInput
-        ),
-        {
-          value: prevState.todolistInput,
-          done: false,
-        },
-      ],
-    }));
+  const getData = async () => {
+    try {
+      const res = await api.get('/');
+      setState({
+        todolistInput: '',
+        todoList: res.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
-  const onRemove = (value) =>
-    setState((prevState) => ({
-      ...prevState,
-      todoList: prevState.todoList.filter((todo) => todo.value !== value),
-    }));
-  const handleDoneTodo = (updatedTodo) =>
-    setState((prevState) => ({
-      ...prevState,
-      todoList: [
-        ...prevState.todoList
-          .slice(0)
-          .filter((todo) => todo.value !== updatedTodo.value),
-        {
-          ...updatedTodo,
-          done: !updatedTodo.done,
-        },
-      ],
-    }));
+  React.useEffect(() => {
+    getData();
+  }, []);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await api.post('/', {
+        title: state.todolistInput,
+      });
+      getData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const onRemove = async (id) => {
+    try {
+      await api.delete(`/${id}`);
+      getData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const handleDoneTodo = async (id) => {
+    try {
+      await api.put(`/${id}`);
+      getData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <Container>
       <Title title="To Do" />
@@ -68,20 +77,20 @@ const TodoMain = () => {
         <Button type="submit">Add</Button>
       </InputsContainer>
       <ListUl>
-        {state.todoList.map((todo, i) => (
-          <React.Fragment key={todo.value}>
+        {state.todoList?.map((todo, i) => (
+          <React.Fragment key={todo._id}>
             <ListItem>
               <ListItemTextContent
-                onClick={() => handleDoneTodo(todo)}
+                onClick={() => handleDoneTodo(todo._id)}
                 done={todo.done}
               >
-                {todo.value}
+                {todo.title}
               </ListItemTextContent>
               {!todo.done && (
                 <Button
                   borderRadius={12}
                   state="danger"
-                  onClick={() => onRemove(todo.value)}
+                  onClick={() => onRemove(todo._id)}
                 >
                   Remove
                 </Button>
