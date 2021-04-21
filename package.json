@@ -1,0 +1,33 @@
+{
+  "name": "todo-list-react-node",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youssefSamih/todo-list-react-node.git"
+  },
+  "author": "youssef samih",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youssefSamih/todo-list-react-node/issues"
+  },
+  "homepage": "https://github.com/youssefSamih/todo-list-react-node#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "migrate-mongoose": "^4.0.0",
+    "mongoose": "^5.12.5"
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "nodemon": "^2.0.7"
+  }
+}
